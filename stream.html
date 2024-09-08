@@ -51,9 +51,22 @@
             width: 100%;
             height: 480px;
         }
+        #streamStatus {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            z-index: 1000;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
+    <div id="streamStatus">Checking stream status...</div>
+
     <nav>
         <ul>
             <li><a href="index.html">Home</a></li>
@@ -75,5 +88,42 @@
             </iframe>
         </div>
     </main>
+
+    <script>
+        function checkStreamStatus() {
+            const clientId = 'YOUR_CLIENT_ID_HERE'; // Vervang dit met je eigen Twitch client ID
+            const username = 'joepdate'; // Je Twitch gebruikersnaam
+
+            fetch(`https://api.twitch.tv/helix/streams?user_login=${joepdate}`, {
+                headers: {
+                    'Client-ID': gp762nuuoqcoxypju8c569th9wz7q5,
+                    'Authorization': '54tpgq14t3c4o4ddnhtz0tsxzltj74' // Je moet een access token genereren
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const statusElement = document.getElementById('streamStatus');
+                if (data.data && data.data.length > 0) {
+                    statusElement.textContent = '🔴 Live :D';
+                    statusElement.style.backgroundColor = 'rgba(0, 255, 0, 0.7)';
+                } else {
+                    statusElement.textContent = 'Not live :(';
+                    statusElement.style.backgroundColor = 'rgba(255, 0, 0, 0.7)';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('streamStatus').textContent = 'Kon stream status niet ophalen';
+            });
+        }
+
+        // Voer de functie uit wanneer de pagina is geladen
+        window.onload = function() {
+            checkStreamStatus();
+        };
+
+        // Check de stream status elke 5 minuten (300000 milliseconden)
+        setInterval(checkStreamStatus, 300000);
+    </script>
 </body>
 </html>
