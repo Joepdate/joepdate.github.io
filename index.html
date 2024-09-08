@@ -43,6 +43,18 @@
             height: 480px;
             margin-top: 20px;
         }
+        .stream-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #6441a5; /* Twitch paars */
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .stream-button:hover {
+            background-color: #7d5bbe;
+        }
     </style>
 </head>
 <body>
@@ -63,14 +75,7 @@
         </ul>
 
         <h2>Bekijk mijn stream</h2>
-        <div class="twitch-embed">
-            <iframe
-                src="https://player.twitch.tv/?channel=joepdate&parent=joepdate.github.io"
-                height="100%"
-                width="100%"
-                allowfullscreen>
-            </iframe>
-        </div>
+        <a href="stream.html" class="stream-button">Ga naar mijn live stream</a>
     </main>
 
     <footer>
