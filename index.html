@@ -31,6 +31,13 @@
             background-color: #333;
             color: #fff;
         }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -43,16 +50,29 @@
         <p>Hi i'm Joepdate and i stream</p>
         
         <h2>check out my socials:</h2>
-        <ul>
+        <ul id="socialLinks">
             <li>Twitch: https://twitch.tv/joepdate</li>
             <li>Instagram: https://instagram.com/joepdate</li>
             <li>TikTok: https://tiktok.com/@joepdate</li>
-            <li>Linktree: https://linktr.ee/joepdate<li>
+            <li>Linktree: https://linktr.ee/joepdate</li>
         </ul>
     </main>
 
     <footer>
         <p>&copy; 2023 Joepdate. All rights reserved.</p>
     </footer>
+
+    <script>
+        function makeUrlsClickable() {
+            const socialLinks = document.getElementById('socialLinks');
+            const urlRegex = /(https?:\/\/[^\s]+)/g;
+            socialLinks.innerHTML = socialLinks.innerHTML.replace(urlRegex, function(url) {
+                return '<a href="' + url + '" target="_blank">' + url + '</a>';
+            });
+        }
+
+        // Voer de functie uit wanneer de pagina is geladen
+        window.onload = makeUrlsClickable;
+    </script>
 </body>
 </html>
