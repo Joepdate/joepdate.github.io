@@ -55,7 +55,8 @@
         
         main {
             flex: 1 0 auto;
-            max-width: 1000px;
+            width: 90%;
+            max-width: 1200px;
             margin: 20px auto;
             background-color: #fff;
             padding: 20px;
@@ -64,7 +65,26 @@
         
         .twitch-embed {
             width: 100%;
-            height: 480px;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            position: relative;
+        }
+        
+        .twitch-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        footer {
+            flex-shrink: 0;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            width: 100%;
         }
         
         #streamStatus {
@@ -107,9 +127,9 @@
         <div class="twitch-embed">
             <iframe
                 src="https://player.twitch.tv/?channel=joepdate&parent=joepdate.github.io"
-                height="100%"
-                width="100%"
-                allowfullscreen>
+                frameborder="0"
+                allowfullscreen="true"
+                scrolling="no">
             </iframe>
         </div>
     </main>
