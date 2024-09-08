@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joepdate's Stream</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        nav {
+            background-color: #333;
+            padding: 10px 0;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 10px;
+        }
+        nav ul li a:hover {
+            background-color: #555;
+        }
+        header {
+            background-color: #4a4a4a;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+        }
+        main {
+            max-width: 1000px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .twitch-embed {
+            width: 100%;
+            height: 480px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="stream.html">Stream</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>Joepdate's Stream</h1>
+    </header>
+    
+    <main>
+        <div class="twitch-embed">
+            <iframe
+                src="https://player.twitch.tv/?channel=joepdate&parent=joepdate.github.io"
+                height="100%"
+                width="100%"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </main>
+</body>
+</html>
