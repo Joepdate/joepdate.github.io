@@ -131,11 +131,6 @@
             });
         }
 
-        // Voer de functie uit wanneer de pagina is geladen
-        window.onload = makeUrlsClickable;
-    </script>
-
-    <script>
         function checkStreamStatus() {
             const clientId = 'YOUR_CLIENT_ID_HERE'; // Vervang dit met je eigen Twitch client ID
             const username = 'joepdate'; // Je Twitch gebruikersnaam
@@ -163,14 +158,14 @@
             });
         }
 
-        // Voer de functie uit wanneer de pagina is geladen
+        // Voer de functies uit wanneer de pagina is geladen
         window.onload = function() {
+            makeUrlsClickable();
             checkStreamStatus();
-            // Voer eventuele andere onload functies hier uit
         };
 
         // Check de stream status elke 5 minuten (300000 milliseconden)
         setInterval(checkStreamStatus, 300000);
     </script>
 </body>
-</html
+</html>
