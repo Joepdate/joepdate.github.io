@@ -25,10 +25,12 @@
         }
         
         nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
             list-style-type: none;
             padding: 0;
             margin: 0;
-            text-align: center;
         }
         
         nav ul li {
@@ -37,15 +39,44 @@
         }
         
         nav ul li a {
-            padding: 12px 24px;
-            background-color: hsl(222, 100%, 95%);
-            color: hsl(243, 80%, 62%);
-            position: relative;
-            border-radius: 6px;
-            overflow: hidden;
-            z-index: 1;
+            border: none;
+            display: inline-flex;
+            padding: 0.75rem 1.5rem;
+            background-color: #488aec;
+            color: #ffffff;
+            font-size: 0.75rem;
+            line-height: 1rem;
+            font-weight: 700;
+            text-align: center;
             text-decoration: none;
-            display: inline-block;
+            cursor: pointer;
+            text-transform: uppercase;
+            vertical-align: middle;
+            align-items: center;
+            border-radius: 0.5rem;
+            user-select: none;
+            gap: 0.75rem;
+            box-shadow:
+                0 4px 6px -1px #488aec31,
+                0 2px 4px -1px #488aec17;
+            transition: all 0.6s ease;
+        }
+
+        nav ul li a:hover {
+            box-shadow:
+                0 10px 15px -3px #488aec4f,
+                0 4px 6px -2px #488aec17;
+        }
+
+        nav ul li a:focus,
+        nav ul li a:active {
+            opacity: 0.85;
+            box-shadow: none;
+        }
+
+        nav ul li a svg {
+            width: 1.25rem;
+            height: 1.25rem;
         }
 
         nav ul li a span {
@@ -149,9 +180,9 @@
         <div class="twitch-embed">
             <iframe
                 src="https://player.twitch.tv/?channel=joepdate&parent=joepdate.github.io"
-                frameborder="0"
-                allowfullscreen="true"
-                scrolling="no">
+                height="100%"
+                width="100%"
+                allowfullscreen>
             </iframe>
         </div>
     </main>
