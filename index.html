@@ -46,6 +46,7 @@
                 0 2px 4px -1px #488aec17;
             transition: all 0.6s ease;
             text-decoration: none;
+            justify-content: center; /* Voeg deze regel toe */
         }
 
         nav ul li a:hover {
@@ -63,6 +64,7 @@
         nav ul li a svg {
             width: 1.25rem;
             height: 1.25rem;
+            margin-right: 0.5rem; /* Voeg wat ruimte toe tussen het icoon en de tekst */
         }
 
         header {
@@ -151,8 +153,14 @@
     <div id="streamStatus">Checking stream status...</div>
     <nav>
         <ul>
-            <li><a href="index.html"><svg><!-- SVG code hier --></svg>Home</a></li>
-            <li><a href="stream.html"><svg><!-- SVG code hier --></svg>Stream</a></li>
+            <li><a href="index.html">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                Home
+            </a></li>
+            <li><a href="stream.html">Stream</a></li>
         </ul>
     </nav>
 
