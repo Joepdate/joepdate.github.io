@@ -5,183 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Joepdate's site</title>
     <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700" rel="stylesheet">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        nav {
-            background-color: transparent;
-            padding: 20px 0;
-        }
-        nav ul {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        nav ul li a {
-            border: none;
-            display: flex;
-            padding: 0.75rem 1.5rem;
-            background-color: #488aec;
-            color: #ffffff;
-            font-size: 0.75rem;
-            line-height: 1rem;
-            font-weight: 700;
-            text-align: center;
-            cursor: pointer;
-            text-transform: uppercase;
-            vertical-align: middle;
-            align-items: center;
-            border-radius: 0.5rem;
-            user-select: none;
-            gap: 0.75rem;
-            box-shadow:
-                0 4px 6px -1px #488aec31,
-                0 2px 4px -1px #488aec17;
-            transition: all 0.6s ease;
-            text-decoration: none;
-            justify-content: center; /* Voeg deze regel toe */
-        }
-
-        nav ul li a:hover {
-            box-shadow:
-                0 10px 15px -3px #488aec4f,
-                0 4px 6px -2px #488aec17;
-        }
-
-        nav ul li a:focus,
-        nav ul li a:active {
-            opacity: 0.85;
-            box-shadow: none;
-        }
-
-        nav ul li a svg {
-            width: 1.25rem;
-            height: 1.25rem;
-            margin-right: 0.5rem; /* Voeg wat ruimte toe tussen het icoon en de tekst */
-        }
-
-        header {
-            background-color: #4a4a4a;
-            color: #fff;
-            text-align: center;
-            padding: 1rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        main {
-            flex: 1 0 auto;
-            width: 90%;
-            max-width: 1200px;
-            margin: 20px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-        }
-        footer {
-            text-align: center;
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #333;
-            color: #fff;
-        }
-        a {
-            color: #0066cc;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .twitch-embed {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-        }
-        .twitch-embed iframe {
-            width: 100%;
-            height: 100%;
-        }
-        .stream-button {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #6441a5; /* Twitch paars */
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .stream-button:hover {
-            background-color: #7d5bbe;
-        }
-        #streamStatus {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            z-index: 1000;
-            font-weight: bold;
-        }
-        
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-        
-        body {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        footer {
-            flex-shrink: 0;
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px 0;
-            width: 100%;
-        }
-
-        body {
-            overflow: hidden;
-            font-family: 'Ubuntu Mono', monospace;
-        }
-
-        .animated-title-container {
-            width: 100%;
-        }
-
-        .animated-title {
-            font-size: 4.3em;
-            letter-spacing: -4px;
-            font-weight: 700;
-            color: #7e2ea0;
-            text-align: center;
-            margin: 0;
-        }
-
-        .cssanimation, .cssanimation span {
-            animation-duration: 1s;
-            animation-fill-mode: both;
-        }
-
-        .cssanimation span { display: inline-block }
-
-        .hu__hu__ { animation: hu__hu__ infinite 2s ease-in-out }
-        @keyframes hu__hu__ {
-            50% { transform: translateY(30px) }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="streamStatus">Checking stream status...</div>
@@ -201,7 +25,7 @@
     <header>
         <div class="animated-title-container">
             <h1 class="animated-title cssanimation hu__hu__ sequence">Joepdate's site</h1>
-            <!-- <h1 class="animated-title cssanimation hu__hu__ random">Joepdate's site</h1> -->
+            <h1 class="animated-title cssanimation hu__hu__ random">Joepdate's site</h1>
         </div>
     </header>
     
@@ -216,7 +40,6 @@
             <li>TikTok: https://tiktok.com/@joepdate</li>
             <li>Linktree: https://linktr.ee/joepdate</li>
         </ul>
-
     </main>
 
     <footer>
