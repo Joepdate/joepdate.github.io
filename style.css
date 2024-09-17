@@ -1,0 +1,38 @@
+body {
+    overflow: hidden;
+    font-family: 'Ubuntu Mono', monospace;
+}
+
+.animated-title-container {
+    width: 100%;
+}
+
+.animated-title {
+    font-size: 4.3em;
+    letter-spacing: -4px;
+    font-weight: 700;
+    color: #7e2ea0;
+    text-align: center;
+    margin: 0;
+}
+
+.cssanimation, .cssanimation span {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+.cssanimation span { 
+    display: inline-block;
+}
+
+.hu__hu__ { 
+    animation: hu__hu__ infinite 2s ease-in-out;
+}
+
+@keyframes hu__hu__ {
+    50% { 
+        transform: translateY(30px);
+    }
+}
+
+/* ... andere stijlen ... */
