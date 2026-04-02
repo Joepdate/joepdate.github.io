@@ -19,6 +19,7 @@
                 Home
             </a></li>
             <li><a href="stream.html">Stream</a></li>
+            <li><a href="artemis-ii.html">Artemis II</a></li>
         </ul>
     </nav>
 
@@ -31,7 +32,7 @@
     
     <main>
         <h2>Over Mij</h2>
-        <p>Hi i'm Joepdate and i stream</p>
+        <p>Hi i'm Joepdate en ik stream</p>
         
         <h2>check out my socials:</h2>
         <ul id="socialLinks">
@@ -56,13 +57,13 @@
         }
 
         function checkStreamStatus() {
-            const clientId = 'YOUR_CLIENT_ID_HERE'; // Vervang dit met je eigen Twitch client ID
-            const username = 'joepdate'; // Je Twitch gebruikersnaam
+            const clientId = 'YOUR_CLIENT_ID_HERE';
+            const username = 'joepdate';
 
             fetch(`https://api.twitch.tv/helix/streams?user_login=${joepdate}`, {
                 headers: {
                     'Client-ID': gp762nuuoqcoxypju8c569th9wz7q5,
-                    'Authorization': '54tpgq14t3c4o4ddnhtz0tsxzltj74' // Je moet een access token genereren
+                    'Authorization': '54tpgq14t3c4o4ddnhtz0tsxzltj74'
                 }
             })
             .then(response => response.json())
@@ -82,13 +83,11 @@
             });
         }
 
-        // Voer de functies uit wanneer de pagina is geladen
         window.onload = function() {
             makeUrlsClickable();
             checkStreamStatus();
         };
 
-        // Check de stream status elke 5 minuten (300000 milliseconden)
         setInterval(checkStreamStatus, 300000);
     </script>
 </body>
