@@ -7,7 +7,16 @@
   <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
-    body { margin: 0; font-family: 'Ubuntu Mono', monospace; }
+    /* Achtergrond zwart en contrasterende tekst */
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #000;
+      color: #fff;
+      font-family: 'Ubuntu Mono', monospace;
+    }
+    nav ul { list-style: none; padding: 0; margin: 0; display:flex; gap:12px; align-items:center; }
+    nav a { text-decoration: none; color: #fff; padding: 8px; display:inline-block; }
     header { text-align: center; padding: 1rem; }
     .video-grid {
       display: grid;
@@ -16,22 +25,28 @@
       padding: 1rem;
       box-sizing: border-box;
     }
-    .video-grid .video {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      background: #000;
+    .video { width: 100%; aspect-ratio: 16/9; background: #000; }
+    .video iframe { width: 100%; height: 100%; border: 0; display: block; }
+    @media (max-width: 800px) { .video-grid { grid-template-columns: 1fr; } }
+
+    /* Unmute knop */
+    .controls {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      display:flex;
+      gap: 0.5rem;
+      z-index: 9999;
     }
-    .video-grid iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-      display: block;
+    .btn {
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.18);
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
     }
-    @media (max-width: 800px) {
-      .video-grid { grid-template-columns: 1fr; }
-    }
-    nav ul { list-style: none; padding: 0; margin: 0; display:flex; gap:12px; align-items:center; }
-    nav a { text-decoration: none; color: inherit; padding: 8px; display:inline-block; }
   </style>
 </head>
 <body>
@@ -45,35 +60,55 @@
 
   <header>
     <h1>Artemis II</h1>
-    <p>Twee YouTube livestreams — klik op fullscreen om ze groter te bekijken.</p>
+    <p>Twee YouTube livestreams — autoplay (gemute) en een knop om geluid aan te zetten.</p>
   </header>
 
   <main>
     <section class="video-grid">
-      <!-- YouTube live 1 -->
-      <div class="video">
-        <iframe
-          src="https://www.youtube.com/embed/6RwfNBtepa4"
-          title="Artemis II - Stream 1 (6RwfNBtepa4)"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      <div class="video" id="player1-container">
+        <iframe id="player1"
+          src="https://www.youtube.com/embed/6RwfNBtepa4?autoplay=1&mute=1&playsinline=1&enablejsapi=1"
+          title="Artemis II - Stream 1"
+          allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
           allowfullscreen>
         </iframe>
       </div>
 
-      <!-- YouTube live 2 -->
-      <div class="video">
-        <iframe
-          src="https://www.youtube.com/embed/m3kR2KK8TEs"
-          title="Artemis II - Stream 2 (m3kR2KK8TEs)"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      <div class="video" id="player2-container">
+        <iframe id="player2"
+          src="https://www.youtube.com/embed/m3kR2KK8TEs?autoplay=1&mute=1&playsinline=1&enablejsapi=1"
+          title="Artemis II - Stream 2"
+          allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
           allowfullscreen>
         </iframe>
       </div>
     </section>
   </main>
 
-  <footer style="text-align:center;padding:1rem;">
-    <p>&copy; 2026 Joepdate. All rights reserved.</p>
-  </footer>
+  <div class="controls">
+    <button id="unmuteAll" class="btn">Unmute</button>
+    <button id="muteAll" class="btn">Mute</button>
+  </div>
+
+  <!-- YouTube IFrame API (nodig om programatisch unmute/play te doen na gebruiker-interactie) -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script>
+    let player1, player2;
+    function onYouTubeIframeAPIReady() {
+      player1 = new YT.Player('player1', {});
+      player2 = new YT.Player('player2', {});
+    }
+
+    // Knoppen: unmute/mute — dit vereist een echte klik van de gebruiker (browser policy)
+    document.getElementById('unmuteAll').addEventListener('click', function() {
+      if (player1 && player1.unMute) { player1.unMute(); player1.playVideo(); }
+      if (player2 && player2.unMute) { player2.unMute(); player2.playVideo(); }
+    });
+
+    document.getElementById('muteAll').addEventListener('click', function() {
+      if (player1 && player1.mute) { player1.mute(); }
+      if (player2 && player2.mute) { player2.mute(); }
+    });
+  </script>
 </body>
 </html>
