@@ -1,75 +1,79 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artemis II</title>
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Artemis II - Joepdate</title>
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { margin: 0; font-family: 'Ubuntu Mono', monospace; }
+    header { text-align: center; padding: 1rem; }
+    .video-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      padding: 1rem;
+      box-sizing: border-box;
+    }
+    .video-grid .video {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+    }
+    .video-grid iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+    @media (max-width: 800px) {
+      .video-grid { grid-template-columns: 1fr; }
+    }
+    nav ul { list-style: none; padding: 0; margin: 0; display:flex; gap:12px; align-items:center; }
+    nav a { text-decoration: none; color: inherit; padding: 8px; display:inline-block; }
+  </style>
 </head>
 <body>
-    <div id="streamStatus">Checking stream status...</div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="stream.html">Stream</a></li>
+      <li><a href="artemis-ii.html">Artemis II</a></li>
+    </ul>
+  </nav>
 
-    <nav>
-        <ul>
-            <li><a href="index.html">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                </svg>
-                Home
-            </a></li>
-            <li><a href="stream.html">Stream</a></li>
-            <li><a href="artemis-ii.html">Artemis II</a></li>
-        </ul>
-    </nav>
+  <header>
+    <h1>Artemis II</h1>
+    <p>Twee YouTube livestreams — klik op fullscreen om ze groter te bekijken.</p>
+  </header>
 
-    <header>
-        <h1>Artemis II</h1>
-    </header>
-    
-    <main>
-        <h2>Welkom bij Artemis II</h2>
-        <p>Dit is jouw nieuwe Artemis II pagina!</p>
-    </main>
+  <main>
+    <section class="video-grid">
+      <!-- YouTube live 1 -->
+      <div class="video">
+        <iframe
+          src="https://www.youtube.com/embed/6RwfNBtepa4"
+          title="Artemis II - Stream 1 (6RwfNBtepa4)"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
 
-    <footer>
-        <p>&copy; 2025 Joepdate. All rights reserved.</p>
-    </footer>
+      <!-- YouTube live 2 -->
+      <div class="video">
+        <iframe
+          src="https://www.youtube.com/embed/m3kR2KK8TEs"
+          title="Artemis II - Stream 2 (m3kR2KK8TEs)"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </section>
+  </main>
 
-    <script>
-        function checkStreamStatus() {
-            const clientId = 'YOUR_CLIENT_ID_HERE';
-            const username = 'joepdate';
-
-            fetch(`https://api.twitch.tv/helix/streams?user_login=${joepdate}`, {
-                headers: {
-                    'Client-ID': gp762nuuoqcoxypju8c569th9wz7q5,
-                    'Authorization': '54tpgq14t3c4o4ddnhtz0tsxzltj74'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                const statusElement = document.getElementById('streamStatus');
-                if (data.data && data.data.length > 0) {
-                    statusElement.textContent = '🔴 Live :D';
-                    statusElement.style.backgroundColor = 'rgba(0, 255, 0, 0.7)';
-                } else {
-                    statusElement.textContent = 'Not live :(';
-                    statusElement.style.backgroundColor = 'rgba(255, 0, 0, 0.7)';
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                document.getElementById('streamStatus').textContent = 'Kon stream status niet ophalen';
-            });
-        }
-
-        window.onload = function() {
-            checkStreamStatus();
-        };
-
-        setInterval(checkStreamStatus, 300000);
-    </script>
+  <footer style="text-align:center;padding:1rem;">
+    <p>&copy; 2026 Joepdate. All rights reserved.</p>
+  </footer>
 </body>
 </html>
