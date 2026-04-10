@@ -1,37 +1,145 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artemis II Mission</title>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        #clock {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: rgba(0, 255, 0, 0.8);
-            color: blue;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 24px;
-            text-align: center;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Artemis II - Joepdate</title>
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #000;
+      color: #fff;
+      font-family: 'Ubuntu Mono', monospace;
+    }
+    nav ul { list-style: none; padding: 0; margin: 0; display:flex; gap:12px; align-items:center; }
+    nav a { text-decoration: none; color: #fff; padding: 8px; display:inline-block; }
+    header { text-align: center; padding: 1rem; }
+    .video-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      padding: 1rem;
+      box-sizing: border-box;
+    }
+    .video { width: 100%; aspect-ratio: 16/9; background: #000; }
+    .video iframe { width: 100%; height: 100%; border: 0; display: block; }
+    @media (max-width: 800px) { .video-grid { grid-template-columns: 1fr; } }
+
+    .controls {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      display:flex;
+      gap: 0.5rem;
+      z-index: 9999;
+      flex-wrap: wrap;
+    }
+    .btn {
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.18);
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+      font-family: 'Ubuntu Mono', monospace;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
-    <div id="clock"></div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="stream.html">Stream</a></li>
+      <li><a href="artemis-ii.html">Artemis II</a></li>
+    </ul>
+  </nav>
 
-    <script>
-        const missionStart = new Date('2025-11-01T00:00:00-06:00'); // Houston Time
-        function updateClock() {
-            const now = new Date();
-            document.getElementById('clock').innerHTML = `<div>Current Houston Time: ${now.toLocaleString('en-US', {timeZone: 'America/Chicago'})}</div>`;
-            const elapsedSeconds = Math.floor((now - missionStart) / 1000);
-            document.getElementById('clock').innerHTML += `<div>Mission Elapsed Time: ${elapsedSeconds} seconds</div>`;
+  <header>
+    <h1>Artemis II</h1>
+    <p>Twee YouTube livestreams — autoplay (gemute) en knoppen om geluid en fullscreen te beheren.</p>
+  </header>
+
+  <main>
+    <section class="video-grid">
+      <div class="video" id="player1-container">
+        <iframe id="player1"
+          src="https://www.youtube.com/embed/6RwfNBtepa4?autoplay=1&mute=1&playsinline=1&enablejsapi=1"
+          title="Artemis II - Stream 1"
+          allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <div class="video" id="player2-container">
+        <iframe id="player2"
+          src="https://www.youtube.com/embed/nfhDuOHMp0A?si=EbgmJJzOYkUtJ1Wj?autoplay=1&mute=1&playsinline=1&enablejsapi=1"
+          title="Artemis II - Stream 2"
+          allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </section>
+  </main>
+
+  <footer style="text-align:center;padding:1rem;">
+    <p>&copy; 2026 Joepdate. All rights reserved.</p>
+  </footer>
+
+  <div class="controls">
+    <button id="fullscreenBtn" class="btn">⛶ Fullscreen</button>
+    <button id="unmuteAll" class="btn">🔊 Unmute</button>
+    <button id="muteAll" class="btn">🔇 Mute</button>
+  </div>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script>
+    let player1, player2;
+    function onYouTubeIframeAPIReady() {
+      player1 = new YT.Player('player1', {});
+      player2 = new YT.Player('player2', {});
+    }
+
+    document.getElementById('fullscreenBtn').addEventListener('click', function() {
+      const elem = document.documentElement;
+      if (!document.fullscreenElement) {
+        if (elem.requestFullscreen) {
+          elem.requestFullscreen();
+        } else if (elem.mozRequestFullScreen) {
+          elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) {
+          elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+          elem.msRequestFullscreen();
         }
-        setInterval(updateClock, 1000);
-        updateClock();
-    </script>
+        this.textContent = '⛶ Exit Fullscreen';
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+        this.textContent = '⛶ Fullscreen';
+      }
+    });
+
+    document.getElementById('unmuteAll').addEventListener('click', function() {
+      if (player1 && player1.unMute) { player1.unMute(); player1.playVideo(); }
+      if (player2 && player2.unMute) { player2.unMute(); player2.playVideo(); }
+    });
+
+    document.getElementById('muteAll').addEventListener('click', function() {
+      if (player1 && player1.mute) { player1.mute(); }
+      if (player2 && player2.mute) { player2.mute(); }
+    });
+
+    document.addEventListener('fullscreenchange', function() {
+      if (!document.fullscreenElement) {
+        document.getElementById('fullscreenBtn').textContent = '⛶ Fullscreen';
+      }
+    });
+  </script>
 </body>
 </html>
