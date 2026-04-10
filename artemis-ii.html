@@ -7,7 +7,6 @@
   <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Achtergrond zwart en contrasterende tekst */
     html, body {
       height: 100%;
       margin: 0;
@@ -29,7 +28,6 @@
     .video iframe { width: 100%; height: 100%; border: 0; display: block; }
     @media (max-width: 800px) { .video-grid { grid-template-columns: 1fr; } }
 
-    /* Knoppen */
     .controls {
       position: fixed;
       right: 1rem;
@@ -49,40 +47,6 @@
       backdrop-filter: blur(4px);
       font-family: 'Ubuntu Mono', monospace;
       font-size: 14px;
-    }
-
-    /* Fullscreen styles */
-    body.fullscreen-mode {
-      overflow: hidden;
-    }
-    body.fullscreen-mode nav,
-    body.fullscreen-mode header,
-    body.fullscreen-mode footer {
-      display: none;
-    }
-    body.fullscreen-mode main {
-      width: 100vw;
-      height: 100vh;
-      margin: 0;
-      padding: 0;
-    }
-    body.fullscreen-mode .video-grid {
-      width: 100%;
-      height: 100%;
-      padding: 0;
-      gap: 0;
-      margin: 0;
-    }
-    body.fullscreen-mode .video {
-      aspect-ratio: auto;
-      width: 50%;
-      height: 100%;
-    }
-    @media (max-width: 800px) {
-      body.fullscreen-mode .video {
-        width: 100%;
-        height: 50%;
-      }
     }
   </style>
 </head>
@@ -132,7 +96,6 @@
     <button id="muteAll" class="btn">🔇 Mute</button>
   </div>
 
-  <!-- YouTube IFrame API -->
   <script src="https://www.youtube.com/iframe_api"></script>
   <script>
     let player1, player2;
@@ -141,29 +104,39 @@
       player2 = new YT.Player('player2', {});
     }
 
-    // Fullscreen knop
     document.getElementById('fullscreenBtn').addEventListener('click', function() {
-      document.body.classList.toggle('fullscreen-mode');
-      const isFullscreen = document.body.classList.contains('fullscreen-mode');
-      this.textContent = isFullscreen ? '⛶ Exit Fullscreen' : '⛶ Fullscreen';
+      const elem = document.documentElement;
+      if (!document.fullscreenElement) {
+        if (elem.requestFullscreen) {
+          elem.requestFullscreen();
+        } else if (elem.mozRequestFullScreen) {
+          elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) {
+          elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+          elem.msRequestFullscreen();
+        }
+        this.textContent = '⛶ Exit Fullscreen';
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+        this.textContent = '⛶ Fullscreen';
+      }
     });
 
-    // Unmute knop
     document.getElementById('unmuteAll').addEventListener('click', function() {
       if (player1 && player1.unMute) { player1.unMute(); player1.playVideo(); }
       if (player2 && player2.unMute) { player2.unMute(); player2.playVideo(); }
     });
 
-    // Mute knop
     document.getElementById('muteAll').addEventListener('click', function() {
       if (player1 && player1.mute) { player1.mute(); }
       if (player2 && player2.mute) { player2.mute(); }
     });
 
-    // ESC toets: fullscreen afsluiten
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && document.body.classList.contains('fullscreen-mode')) {
-        document.body.classList.remove('fullscreen-mode');
+    document.addEventListener('fullscreenchange', function() {
+      if (!document.fullscreenElement) {
         document.getElementById('fullscreenBtn').textContent = '⛶ Fullscreen';
       }
     });
